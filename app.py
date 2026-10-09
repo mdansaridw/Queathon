@@ -98,9 +98,22 @@ BENCHMARKS = [
     }
 ]
 
+from ecommerce_scraper import fetch_product_from_url, SAMPLE_ECOMMERCE_LINKS
+
 @app.get("/api/benchmarks")
 def get_benchmarks():
     return BENCHMARKS
+
+@app.get("/api/sample_links")
+def get_sample_links():
+    return list(SAMPLE_ECOMMERCE_LINKS.values())
+
+@app.post("/api/fetch_url")
+def fetch_url(url: str = Form(...)):
+    if not url:
+        raise HTTPException(status_code=400, detail="URL cannot be empty")
+    data = fetch_product_from_url(url)
+    return data
 
 @app.get("/api/registry")
 def get_registry():
