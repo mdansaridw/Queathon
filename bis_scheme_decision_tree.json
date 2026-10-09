@@ -1,0 +1,104 @@
+{
+  "tree_id": "BIS-SCHEME-ROUTER-v1",
+  "title": "BIS Conformity Assessment Scheme Decision Tree",
+  "version": "1.0",
+  "nodes": {
+    "step_1": {
+      "question": "Where is your product manufactured?",
+      "options": [
+        {
+          "label": "Domestic (Manufactured inside India)",
+          "next": "step_2_domestic"
+        },
+        {
+          "label": "Foreign (Overseas importing into India)",
+          "next": "result_fmcs"
+        }
+      ]
+    },
+    "step_2_domestic": {
+      "question": "What product category does your item belong to?",
+      "options": [
+        {
+          "label": "IT Hardware, Laptops, Mobile Handsets, or Solar PV",
+          "next": "result_crs"
+        },
+        {
+          "label": "Gold or Silver Jewellery & Artefacts",
+          "next": "result_hallmarking"
+        },
+        {
+          "label": "Industrial Goods, Pressure Cookers, Helmets, Steel, Cement, or Electrical Appliances",
+          "next": "step_3_factory_testing"
+        },
+        {
+          "label": "Textiles, Furniture, or General Unregulated Consumer Goods",
+          "next": "result_voluntary"
+        }
+      ]
+    },
+    "step_3_factory_testing": {
+      "question": "Does your factory possess an in-house laboratory matching BIS Scheme of Testing and Inspection (STI)?",
+      "options": [
+        {
+          "label": "Yes, we have / can establish the required in-house test setup",
+          "next": "result_scheme1_normal"
+        },
+        {
+          "label": "No, we are a micro-enterprise relying entirely on external testing",
+          "next": "result_scheme1_simplified"
+        }
+      ]
+    }
+  },
+  "results": {
+    "result_scheme1_normal": {
+      "scheme_name": "Scheme-I (Standard ISI Mark Certification)",
+      "route_type": "Factory Audit + In-house Laboratory Testing",
+      "description": "Applicable for mandatory QCO items (e.g., IS 2347 for Pressure Cookers, IS 4151 for Helmets, IS 269 for Cement). Requires factory audit, sample sealing, and continuous in-house testing equipment.",
+      "portal_name": "Manakonline (e-BIS)",
+      "portal_url": "https://www.manakonline.in",
+      "msme_benefit": "80% concession on application and annual license fee for micro-enterprises and women startups."
+    },
+    "result_scheme1_simplified": {
+      "scheme_name": "Scheme-I (Simplified Procedure for MSMEs)",
+      "route_type": "Pre-tested Sample + Fast-Track Verification Audit",
+      "description": "Grant of license within 30 days based on prior testing from a BIS-recognized NABL lab, followed by verification audit.",
+      "portal_name": "Manakonline",
+      "portal_url": "https://www.manakonline.in",
+      "msme_benefit": "Fast-tracked verification within 30 days."
+    },
+    "result_crs": {
+      "scheme_name": "Scheme-II (Compulsory Registration Scheme - CRS)",
+      "route_type": "Self-Declaration of Conformity (SDoC) via NABL Test Report",
+      "description": "Mandated by MeitY / MNRE for electronic items, lithium cells, power banks, and solar modules. No factory audit required before grant.",
+      "portal_name": "CRS BIS Portal",
+      "portal_url": "https://www.crsbis.in",
+      "msme_benefit": "No factory audit inspection fee; entirely paperless digital registration."
+    },
+    "result_fmcs": {
+      "scheme_name": "Scheme-IV / FMCS (Foreign Manufacturers Certification Scheme)",
+      "route_type": "Physical Overseas Factory Inspection + India Authorized Representative (AIR)",
+      "description": "Required for foreign manufacturing units exporting ISI mark mandatory goods to India. Requires appointment of an Authorized Indian Representative (AIR).",
+      "portal_name": "FMCS Portal",
+      "portal_url": "https://www.bis.gov.in/product-certification/fmcs-overview/",
+      "msme_benefit": "Allows legitimate direct entry into Indian domestic markets."
+    },
+    "result_hallmarking": {
+      "scheme_name": "BIS Hallmarking Scheme (HUID Assaying)",
+      "route_type": "Assaying & Hallmarking Centre (AHC) Laser Inscription",
+      "description": "Mandatory 6-digit alphanumeric HUID laser marking for 14K, 18K, 20K, 22K, 23K, and 24K gold articles. Jeweller registers online without physical factory audit.",
+      "portal_name": "Manakonline Jeweller Registration",
+      "portal_url": "https://www.manakonline.in",
+      "msme_benefit": "Free registration for micro-jewellers with turnover below specified limits."
+    },
+    "result_voluntary": {
+      "scheme_name": "Voluntary Standardisation / No Mandatory QCO",
+      "route_type": "Voluntary ISI Scheme or Self-Compliance",
+      "description": "Your product currently does not fall under an active mandatory Gazette Quality Control Order (QCO). You may voluntarily apply for ISI mark to build consumer trust, or sell without mandatory certification.",
+      "portal_name": "Know Your Standards Portal",
+      "portal_url": "https://services.bis.gov.in",
+      "msme_benefit": "Zero mandatory compliance barrier to begin selling."
+    }
+  }
+}

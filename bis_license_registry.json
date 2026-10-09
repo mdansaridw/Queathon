@@ -1,0 +1,123 @@
+[
+  {
+    "cml_number": "8765432",
+    "licensee_name": "Steelbird Hi-Tech India Ltd.",
+    "brand": "Steelbird",
+    "is_code": "IS 4151:2015",
+    "product_category": "Motorcycle Helmet",
+    "status": "OPERATIVE",
+    "status_description": "Valid and Operative Certification Mark Licence",
+    "valid_till": "2027-12-31",
+    "factory_address": "Plot No 4, Industrial Area, Baddi, Himachal Pradesh"
+  },
+  {
+    "cml_number": "9182736",
+    "licensee_name": "Studds Accessories Limited",
+    "brand": "Studds / SMK",
+    "is_code": "IS 4151:2015",
+    "product_category": "Motorcycle Helmet",
+    "status": "OPERATIVE",
+    "status_description": "Valid and Operative Certification Mark Licence",
+    "valid_till": "2028-06-30",
+    "factory_address": "Plot No. 136, Sector 24, Faridabad, Haryana"
+  },
+  {
+    "cml_number": "5432109",
+    "licensee_name": "Aqua Pure Bottling Co. (Former Bisleri Franchisee)",
+    "brand": "Aqua Pure",
+    "is_code": "IS 14543:2024",
+    "product_category": "Packaged Drinking Water",
+    "status": "CANCELLED",
+    "status_description": "Licence Cancelled by BIS Enforcement Branch due to recurring microbiological test failure.",
+    "valid_till": "2024-05-15",
+    "factory_address": "Village Kherki Daula, Gurugram, Haryana"
+  },
+  {
+    "cml_number": "6543210",
+    "licensee_name": "Himalayan Natural Springs Pvt Ltd",
+    "brand": "Himalaya Fresh",
+    "is_code": "IS 14543:2024",
+    "product_category": "Packaged Drinking Water",
+    "status": "SUSPENDED",
+    "status_description": "Licence under Stop-Marking / Suspended state pending chemical pesticide residue verification.",
+    "valid_till": "2025-01-10",
+    "factory_address": "Solan Industrial Area, Himachal Pradesh"
+  },
+  {
+    "cml_number": "7654321",
+    "licensee_name": "Tata Consumer Products Limited",
+    "brand": "Tata Copper Plus",
+    "is_code": "IS 14543:2024",
+    "product_category": "Packaged Drinking Water",
+    "status": "OPERATIVE",
+    "status_description": "Valid and Operative Certification Mark Licence",
+    "valid_till": "2028-11-20",
+    "factory_address": "KIADB Industrial Area, Bengaluru, Karnataka"
+  },
+  {
+    "cml_number": "3141592",
+    "licensee_name": "Hawkins Cookers Limited",
+    "brand": "Hawkins",
+    "is_code": "IS 2347:2017",
+    "product_category": "Pressure Cooker",
+    "status": "OPERATIVE",
+    "status_description": "Valid and Operative Certification Mark Licence",
+    "valid_till": "2029-03-31",
+    "factory_address": "Thane Belapur Road, Thane, Maharashtra"
+  },
+  {
+    "cml_number": "2718281",
+    "licensee_name": "TTK Prestige Limited",
+    "brand": "Prestige",
+    "is_code": "IS 2347:2017",
+    "product_category": "Pressure Cooker",
+    "status": "OPERATIVE",
+    "status_description": "Valid and Operative Certification Mark Licence",
+    "valid_till": "2028-09-15",
+    "factory_address": "Hosur Industrial Complex, Tamil Nadu"
+  },
+  {
+    "cml_number": "1414213",
+    "licensee_name": "Bajaj Electricals Ltd",
+    "brand": "Bajaj",
+    "is_code": "IS 302 (Part 2/Sec 3):2021",
+    "product_category": "Electric Iron",
+    "status": "OPERATIVE",
+    "status_description": "Valid and Operative Certification Mark Licence",
+    "valid_till": "2027-08-30",
+    "factory_address": "Chakan MIDC, Pune, Maharashtra"
+  },
+  {
+    "cml_number": "9876543",
+    "licensee_name": "FunSkool India Limited",
+    "brand": "Funskool",
+    "is_code": "IS 9873 (Part 1):2019",
+    "product_category": "Toys",
+    "status": "OPERATIVE",
+    "status_description": "Valid and Operative Certification Mark Licence for Safety of Toys",
+    "valid_till": "2027-04-12",
+    "factory_address": "Ranipet Industrial Estate, Tamil Nadu"
+  },
+  {
+    "cml_number": "4567890",
+    "licensee_name": "UltraTech Cement Limited",
+    "brand": "UltraTech",
+    "is_code": "IS 12269:2013",
+    "product_category": "Ordinary Portland Cement (53 Grade)",
+    "status": "OPERATIVE",
+    "status_description": "Valid and Operative Certification Mark Licence",
+    "valid_till": "2029-01-31",
+    "factory_address": "Kotputli, Rajasthan"
+  },
+  {
+    "cml_number": "9169691",
+    "licensee_name": "Studds Accessories Limited",
+    "brand": "Studds",
+    "is_code": "IS 4151:2015",
+    "product_category": "Motorcycle Helmet",
+    "status": "OPERATIVE",
+    "status_description": "Valid and Operative Certification Mark Licence for Studds Two-Wheeler Helmets",
+    "valid_till": "2028-10-31",
+    "factory_address": "Plot 136, Sector 24, Faridabad, Haryana"
+  }
+]

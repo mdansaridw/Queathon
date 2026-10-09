@@ -1,0 +1,282 @@
+[
+  {
+    "id": "TC_01",
+    "query": "Which standard applies to domestic pressure cookers in India?",
+    "expected_is": "IS 2347:2017",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_02",
+    "query": "Do portable power banks need BIS certification under CRS?",
+    "expected_is": "IS 16046 (Part 2):2018",
+    "expected_scheme": "Scheme-II (CRS)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_03",
+    "query": "What are the mandatory marks on hallmarked gold jewellery and what is HUID?",
+    "expected_is": "IS 1417:2016",
+    "expected_scheme": "Hallmarking",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_04",
+    "query": "What standard covers two-wheeler motorcycle protective helmets?",
+    "expected_is": "IS 4151:2020",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_05",
+    "query": "What standard governs packaged drinking water testing and certification?",
+    "expected_is": "IS 14543:2024",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_06",
+    "query": "Which Indian Standard is applicable for TMT steel bars in construction?",
+    "expected_is": "IS 1786:2008",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_07",
+    "query": "What safety tests are mandatory for non-electric children toys in India?",
+    "expected_is": "IS 9873 (Part 1):2019",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_08",
+    "query": "What standard applies to electronic drivers and controlgear for LED lighting?",
+    "expected_is": "IS 15885 (Part 2/Sec 13):2012",
+    "expected_scheme": "Scheme-II (CRS)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_09",
+    "query": "Which BIS code specifies 1100V PVC insulated domestic electrical copper cables?",
+    "expected_is": "IS 694:2010",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_10",
+    "query": "What standard applies to 6A and 16A plugs and socket-outlets?",
+    "expected_is": "IS 1293:2019",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_11",
+    "query": "What standard governs static electricity watthour meters for domestic smart meters?",
+    "expected_is": "IS 13779:1999",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_12",
+    "query": "Which standard applies to pneumatic tyres used on two and three-wheelers?",
+    "expected_is": "IS 16047:2013",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_13",
+    "query": "What standard regulates architectural toughened and laminated safety glass?",
+    "expected_is": "IS 2553 (Part 1):2018",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_14",
+    "query": "Which standard governs HDPE pipes used for potable water supply?",
+    "expected_is": "IS 15450:2004",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_15",
+    "query": "What standard covers general purpose moisture resistant (MR) and boiling water resistant (BWR) plywood?",
+    "expected_is": "IS 303:1989",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_16",
+    "query": "Which standard specifies requirements for domestic electric storage water geysers?",
+    "expected_is": "IS 2082:2018",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_17",
+    "query": "What standard covers industrial safety shoes with 200J toe cap protection?",
+    "expected_is": "IS 15298 (Part 2):2016",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_18",
+    "query": "Which standard regulates portable fire extinguishers for class A and B fires?",
+    "expected_is": "IS 15683:2018",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_19",
+    "query": "What standard regulates crystalline silicon terrestrial solar PV panels?",
+    "expected_is": "IS 14286:2010",
+    "expected_scheme": "Scheme-II (CRS)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_20",
+    "query": "Which standard applies to point of sale (POS) machines and smart card readers?",
+    "expected_is": "IS 13252 (Part 1):2010",
+    "expected_scheme": "Scheme-II (CRS)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_21",
+    "query": "How do I register a patent with the US Patent and Trademark Office (USPTO)?",
+    "expected_is": null,
+    "expected_scheme": null,
+    "out_of_scope": true
+  },
+  {
+    "id": "TC_22",
+    "query": "What are the US FDA 510(k) clearance requirements for medical gloves?",
+    "expected_is": null,
+    "expected_scheme": null,
+    "out_of_scope": true
+  },
+  {
+    "id": "TC_23",
+    "query": "What is the capital city of Australia?",
+    "expected_is": null,
+    "expected_scheme": null,
+    "out_of_scope": true
+  },
+  {
+    "id": "TC_24",
+    "query": "Write a Python script to scrape live commodity prices from the stock exchange.",
+    "expected_is": null,
+    "expected_scheme": null,
+    "out_of_scope": true
+  },
+  {
+    "id": "TC_25",
+    "query": "Which Indian Standard specifies drinking water quality for piped municipal supplies under Jal Jeevan Mission?",
+    "expected_is": "IS 10500:2012",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_26",
+    "query": "What is the primary Indian Standard for plain and reinforced concrete structural design in building construction?",
+    "expected_is": "IS 456:2000",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_27",
+    "query": "Which specification covers high-strength 53 Grade Ordinary Portland Cement (OPC 53) in India?",
+    "expected_is": "IS 12269:2018",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_28",
+    "query": "What standard covers hot rolled medium and high tensile structural steel plates and sections?",
+    "expected_is": "IS 2062:2011",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_29",
+    "query": "Which Indian Standard governs welded and seamless mild steel tubes for water, gas and piping applications?",
+    "expected_is": "IS 1239 (Part 1):2004",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_30",
+    "query": "What standard applies to outdoor oil-immersed distribution transformers up to 2500 kVA under Ministry of Power QCO?",
+    "expected_is": "IS 1180 (Part 1):2014",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_31",
+    "query": "Which standard defines energy efficiency classes IE2, IE3, IE4 for line-operated three-phase AC electric motors?",
+    "expected_is": "IS 12615:2018",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_32",
+    "query": "What Indian Standard specifies performance and air delivery requirements for electric ceiling fans and BLDC fans?",
+    "expected_is": "IS 374:2019",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_33",
+    "query": "Which BIS safety code applies to electric storage water heaters and geysers up to 200L under DPIIT QCO?",
+    "expected_is": "IS 302 (Part 2/Sec 21):2011",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_34",
+    "query": "What standard specifies safety requirements for domestic electric kitchen chimneys and range hoods?",
+    "expected_is": "IS 302 (Part 2/Sec 31):2009",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_35",
+    "query": "Which Indian Standard governs conductive charging stations and EVSE systems for electric vehicles?",
+    "expected_is": "IS 17017 (Part 1):2018",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_36",
+    "query": "What standard specifies safety and flammability requirements for non-stick coated cookware and frying pans?",
+    "expected_is": "IS 14756:2017",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_37",
+    "query": "Which standard applies to road and street lighting LED luminaires under Compulsory Registration Scheme (CRS)?",
+    "expected_is": "IS 10322 (Part 5/Sec 3):2012",
+    "expected_scheme": "Scheme-II (CRS)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_38",
+    "query": "What standard defines biometric finger minutiae data format for Aadhaar authentication devices under MeitY CRO?",
+    "expected_is": "IS 16805:2018",
+    "expected_scheme": "Scheme-II (CRS)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_39",
+    "query": "What standard covers galvanized corrugated steel roofing sheets under Ministry of Steel QCO?",
+    "expected_is": "IS 277:2018",
+    "expected_scheme": "Scheme-I (ISI)",
+    "out_of_scope": false
+  },
+  {
+    "id": "TC_40",
+    "query": "Can you provide a recipe for chocolate chip cookies?",
+    "expected_is": null,
+    "expected_scheme": null,
+    "out_of_scope": true
+  }
+]

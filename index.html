@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BIS-SHIELD | AI Counterfeit & Mark Misuse Forensic Intelligence</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Real In-Browser Optical Character Recognition (Tesseract.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen">
+
+  <!-- Top Navigation Bar -->
+  <header class="border-b border-slate-800 bg-slate-950/80 sticky top-0 z-50 backdrop-blur">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-amber-500 to-red-600 flex items-center justify-center shadow-lg shadow-amber-500/20">
+          <i class="fa-solid fa-shield-halved text-white text-xl"></i>
+        </div>
+        <div>
+          <span class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+            BIS-SHIELD <span class="text-xs uppercase bg-amber-500/20 text-amber-400 font-semibold px-2 py-0.5 rounded border border-amber-500/30">Forensics v1.2</span>
+          </span>
+          <p class="text-xs text-slate-400">Bureau of Indian Standards Act, 2016 Enforcement Suite</p>
+        </div>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span class="inline-flex items-center gap-1.5 text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Gazette + CM/L Central Registry Active
+        </span>
+        <button onclick="openRegistryModal()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition flex items-center gap-2">
+          <i class="fa-solid fa-id-card-clip text-amber-400"></i> License Registry
+        </button>
+        <button onclick="openStandardsModal()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition flex items-center gap-2">
+          <i class="fa-solid fa-book-bookmark text-sky-400"></i> Standards
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-6 py-8">
+
+    <!-- Benchmark Test Carousel for Judges -->
+    <div class="mb-8">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-sm font-semibold tracking-wide text-slate-300 uppercase flex items-center gap-2">
+          <i class="fa-solid fa-flask-vial text-amber-400"></i> Quick Demonstration Suite (Evaluation Benchmarks)
+        </h2>
+        <span class="text-xs text-slate-400">Click any preset test case to test live OCR and forensic checks</span>
+      </div>
+      <div id="benchmarkCards" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+        <!-- Dynamically injected benchmark cards -->
+      </div>
+    </div>
+
+    <!-- Live Workspace Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <!-- Left Column: Input Modality & Evidence Submission (5 cols) -->
+      <div class="lg:col-span-5 space-y-6">
+        <div class="bg-slate-800/80 rounded-2xl border border-slate-700 p-6 shadow-xl space-y-5">
+          <div class="flex items-center justify-between border-b border-slate-700/80 pb-3">
+            <h3 class="text-base font-semibold text-white flex items-center gap-2">
+              <i class="fa-solid fa-camera-rotate text-amber-400"></i> Packaging Photo & OCR Lab
+            </h3>
+            <span class="text-xs bg-sky-500/20 text-sky-300 border border-sky-500/30 px-2 py-0.5 rounded font-mono">Tesseract.js OCR</span>
+          </div>
+
+          <!-- Product Name Input -->
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1.5">Product Name / Commodity Claimed</label>
+            <input type="text" id="inputProduct" placeholder="e.g., Motorcycle Helmet, Packaged Drinking Water, Electric Iron..." 
+              class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+          </div>
+
+          <!-- Image Dropzone -->
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1.5 flex items-center justify-between">
+              <span>Packaging Label / Document Image</span>
+              <span id="imgStatus" class="text-xs text-amber-400 hidden"><i class="fa-solid fa-check"></i> Image Loaded</span>
+            </label>
+            <div id="dropzone" class="border-2 border-dashed border-slate-700 hover:border-amber-500/60 rounded-xl p-4 text-center cursor-pointer transition bg-slate-900/50">
+              <input type="file" id="fileInput" accept="image/*" class="hidden">
+              <div id="imagePlaceholder" class="space-y-2 py-2">
+                <i class="fa-solid fa-cloud-arrow-up text-2xl text-slate-500"></i>
+                <p class="text-xs text-slate-400">Drop ANY packaging photo, ID card, or label or <span class="text-amber-400 font-semibold underline">browse</span></p>
+                <p class="text-[10px] text-slate-500">Real in-browser OCR will read text directly from pixels</p>
+              </div>
+              <div id="previewContainer" class="hidden relative">
+                <img id="imagePreview" src="" alt="Packaging Preview" class="max-h-44 mx-auto rounded-lg border border-slate-700 shadow-md object-contain">
+                <button type="button" onclick="clearImage(event)" class="absolute top-1 right-1 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs shadow hover:bg-red-700 transition">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live OCR Progress Bar -->
+          <div id="ocrProgressBox" class="hidden space-y-1.5 p-3 bg-slate-900 rounded-xl border border-sky-500/30">
+            <div class="flex justify-between text-xs">
+              <span class="text-sky-300 flex items-center gap-1.5"><i class="fa-solid fa-microchip animate-spin text-sky-400"></i> <span id="ocrStatusText">Running Optical Character Recognition...</span></span>
+              <span id="ocrPercent" class="font-mono text-sky-400 font-bold">0%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
+              <div id="ocrProgressBar" class="bg-sky-400 h-1.5 rounded-full transition-all duration-200" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <!-- Extracted / Editable Claim Text -->
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1.5 flex items-center justify-between">
+              <span>Text Extracted from Image (Or Paste E-Commerce Copy)</span>
+              <span class="text-[10px] text-slate-400 font-normal">Editable</span>
+            </label>
+            <textarea id="inputClaim" rows="4" placeholder="Image OCR output will appear here automatically, or you can paste an Amazon/Flipkart listing..."
+              class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 transition font-mono leading-relaxed"></textarea>
+          </div>
+
+          <!-- Mark Logo Checkbox -->
+          <div class="flex items-center space-x-2 pt-1">
+            <input type="checkbox" id="checkLogo" class="w-4 h-4 rounded text-amber-500 bg-slate-900 border-slate-700 focus:ring-amber-400">
+            <label for="checkLogo" class="text-xs text-slate-300 cursor-pointer">
+              Visual ISI Mark / CRS Symbol present on physical packaging
+            </label>
+          </div>
+
+          <!-- Action Button -->
+          <button onclick="runAudit()" id="btnAudit" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-slate-950 font-bold py-3 rounded-xl shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 transition active:scale-[0.99]">
+            <i class="fa-solid fa-gavel"></i>
+            <span>Execute Statutory Forensics Audit</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Column: Statutory Analysis & Enforcement Results (7 cols) -->
+      <div class="lg:col-span-7 space-y-6">
+        
+        <!-- Welcome Placeholder (shown before first check) -->
+        <div id="emptyState" class="bg-slate-800/40 rounded-2xl border border-dashed border-slate-700 p-12 text-center space-y-4">
+          <div class="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center mx-auto text-amber-400 text-2xl">
+            <i class="fa-solid fa-scale-balanced"></i>
+          </div>
+          <h4 class="text-lg font-semibold text-slate-200">Awaiting Evidence Input</h4>
+          <p class="text-xs text-slate-400 max-w-md mx-auto leading-relaxed">
+            Upload any image (packaging, ID card, label) or click a benchmark case above. The system will run real-time OCR, verify standard codes against the official Gazette, and query the Central License Registry.
+          </p>
+        </div>
+
+        <!-- Result Card (shown after audit) -->
+        <div id="resultsCard" class="hidden space-y-6">
+          
+          <!-- Risk Score Header Banner -->
+          <div id="riskBanner" class="rounded-2xl p-6 border shadow-xl flex items-center justify-between">
+            <div class="space-y-1">
+              <span id="riskBadge" class="text-xs uppercase font-extrabold px-3 py-1 rounded-full border tracking-wide">HIGH RISK VIOLATION</span>
+              <h3 id="riskScoreText" class="text-2xl font-extrabold text-white mt-2">85% Misuse Risk Index</h3>
+              <p id="actionRecommendation" class="text-xs text-slate-200 max-w-md">Immediate Investigation & Notice under Section 29/30 recommended.</p>
+            </div>
+            <div class="relative w-24 h-24 flex items-center justify-center">
+              <svg class="w-24 h-24 transform -rotate-90" viewBox="0 0 36 36">
+                <path class="text-slate-800" stroke-width="3.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                <path id="circleProgress" class="text-amber-500" stroke-width="3.5" stroke-dasharray="85, 100" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+              </svg>
+              <span id="circlePercent" class="absolute text-xl font-bold font-mono text-white">85%</span>
+            </div>
+          </div>
+
+          <!-- License Registry Cross-Check Banner (The New Core Feature) -->
+          <div id="registryCard" class="bg-slate-800/90 rounded-2xl border border-slate-700 p-5 shadow-xl space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-700/80 pb-2">
+              <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                <i class="fa-solid fa-id-card-clip text-amber-400"></i> Central BIS License Registry Verification
+              </h4>
+              <span id="registryStatusBadge" class="text-[10px] font-bold px-2 py-0.5 rounded border">OPERATIVE</span>
+            </div>
+            <div id="registryContent" class="text-xs space-y-2">
+              <!-- Dynamically populated license match info -->
+            </div>
+          </div>
+
+          <!-- Statutory Violations Panel -->
+          <div class="bg-slate-800/80 rounded-2xl border border-slate-700 p-6 shadow-xl space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-700/80 pb-3">
+              <h4 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                <i class="fa-solid fa-triangle-exclamation text-red-400"></i> Statutory Violation Audit Trail
+              </h4>
+              <span id="violationCount" class="text-xs bg-red-500/20 text-red-300 px-2 py-0.5 rounded border border-red-500/30">2 Violations Detected</span>
+            </div>
+            <div id="violationsList" class="space-y-3">
+              <!-- Dynamically populated violations -->
+            </div>
+          </div>
+
+          <!-- Forensic Extraction & Evidence Findings Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Entities Extracted -->
+            <div class="bg-slate-800/80 rounded-2xl border border-slate-700 p-5 space-y-3">
+              <h5 class="text-xs font-bold text-slate-300 uppercase flex items-center gap-2">
+                <i class="fa-solid fa-fingerprint text-amber-400"></i> Extracted Identifiers
+              </h5>
+              <div id="entitiesBox" class="space-y-2 text-xs font-mono">
+                <!-- Dynamically populated identifiers -->
+              </div>
+            </div>
+
+            <!-- Evidentiary Findings List -->
+            <div class="bg-slate-800/80 rounded-2xl border border-slate-700 p-5 space-y-3">
+              <h5 class="text-xs font-bold text-slate-300 uppercase flex items-center gap-2">
+                <i class="fa-solid fa-clipboard-check text-sky-400"></i> Evidence Findings
+              </h5>
+              <div id="findingsBox" class="space-y-1.5 text-xs">
+                <!-- Dynamically populated findings -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Official Enforcement Dossier Export Action -->
+          <div class="bg-slate-950 rounded-2xl border border-slate-800 p-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="space-y-1">
+              <h5 class="text-sm font-semibold text-white flex items-center gap-2">
+                <i class="fa-solid fa-file-contract text-amber-400"></i> Preliminary Enforcement Dossier
+              </h5>
+              <p class="text-xs text-slate-400">Formal legal briefing prepared for BIS Enforcement Officers under Section 30.</p>
+            </div>
+            <div class="flex items-center space-x-3 w-full md:w-auto">
+              <button onclick="copyDossier()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-2.5 rounded-xl border border-slate-700 transition flex items-center gap-2 flex-1 md:flex-initial justify-center">
+                <i class="fa-solid fa-copy"></i> Copy Text
+              </button>
+              <button onclick="downloadDossier()" class="text-xs bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2.5 rounded-xl transition flex items-center gap-2 flex-1 md:flex-initial justify-center shadow-lg shadow-amber-500/20">
+                <i class="fa-solid fa-download"></i> Export Dossier (.txt)
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Central License Registry Modal -->
+  <div id="registryModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-4xl w-full max-h-[85vh] flex flex-col shadow-2xl">
+      <div class="p-5 border-b border-slate-800 flex items-center justify-between">
+        <h3 class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-id-card-clip text-amber-400"></i> Central BIS CM/L License Registry
+        </h3>
+        <button onclick="closeRegistryModal()" class="text-slate-400 hover:text-white text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="p-4 border-b border-slate-800">
+        <p class="text-xs text-slate-400">Live authoritative database of active and cancelled CM/L licences used to detect licence hijacking and counterfeit claims.</p>
+      </div>
+      <div id="registryList" class="p-4 overflow-y-auto space-y-3 flex-1 text-xs">
+        <!-- Dynamically populated registry items -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Standards Registry Modal -->
+  <div id="standardsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-3xl w-full max-h-[85vh] flex flex-col shadow-2xl">
+      <div class="p-5 border-b border-slate-800 flex items-center justify-between">
+        <h3 class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-book-bookmark text-sky-400"></i> Gazette Verified Indian Standards Registry (100 IS Codes)
+        </h3>
+        <button onclick="closeStandardsModal()" class="text-slate-400 hover:text-white text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="p-4 border-b border-slate-800">
+        <input type="text" id="standardSearch" oninput="searchStandards(this.value)" placeholder="Search by Standard (e.g., IS 14543), Product Name, or Category..."
+          class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-amber-500">
+      </div>
+      <div id="standardsList" class="p-4 overflow-y-auto space-y-3 flex-1 text-xs">
+        <!-- Dynamically populated standards -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentUploadedPath = "";
+    let currentDossierText = "";
+    let benchmarks = [];
+    let licenseRegistry = [];
+
+    async function init() {
+      try {
+        const res = await fetch('/api/benchmarks');
+        benchmarks = await res.json();
+        renderBenchmarkCards();
+
+        const regRes = await fetch('/api/registry');
+        licenseRegistry = await regRes.json();
+      } catch (e) {
+        console.error("Initialization error", e);
+      }
+    }
+
+    function renderBenchmarkCards() {
+      const container = document.getElementById('benchmarkCards');
+      container.innerHTML = benchmarks.map((b, idx) => `
+        <button onclick="loadBenchmark(${idx})" class="text-left bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/80 hover:border-amber-500/50 p-3 rounded-xl transition group flex flex-col justify-between h-28 shadow">
+          <div>
+            <div class="flex items-center justify-between text-[10px] text-amber-400 font-bold mb-1">
+              <span>${b.id}</span>
+              <i class="fa-solid fa-arrow-up-right-from-square opacity-0 group-hover:opacity-100 transition"></i>
+            </div>
+            <div class="text-xs font-semibold text-slate-200 group-hover:text-amber-300 transition line-clamp-2 leading-tight">${b.title}</div>
+          </div>
+          <div class="text-[10px] text-slate-400 truncate">${b.product}</div>
+        </button>
+      `).join('');
+    }
+
+    function loadBenchmark(idx) {
+      const b = benchmarks[idx];
+      document.getElementById('inputProduct').value = b.product;
+      document.getElementById('inputClaim').value = b.claim;
+      document.getElementById('checkLogo').checked = b.has_logo;
+      currentUploadedPath = b.image;
+      
+      const preview = document.getElementById('imagePreview');
+      preview.src = b.image;
+      document.getElementById('previewContainer').classList.remove('hidden');
+      document.getElementById('imagePlaceholder').classList.add('hidden');
+      document.getElementById('imgStatus').classList.remove('hidden');
+
+      // Auto trigger audit
+      runAudit();
+    }
+
+    // Drag and drop & File upload with Real In-Browser OCR
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('fileInput');
+
+    dropzone.addEventListener('click', (e) => {
+      if (!e.target.closest('button')) fileInput.click();
+    });
+
+    fileInput.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      handleLocalImage(file);
+    });
+
+    async function handleLocalImage(file) {
+      // 1. Preview locally
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        const dataUrl = e.target.result;
+        document.getElementById('imagePreview').src = dataUrl;
+        document.getElementById('previewContainer').classList.remove('hidden');
+        document.getElementById('imagePlaceholder').classList.add('hidden');
+        document.getElementById('imgStatus').classList.remove('hidden');
+      };
+      reader.readAsDataURL(file);
+
+      // 2. Upload and run fast hardware-accelerated Windows native OCR
+      const pBox = document.getElementById('ocrProgressBox');
+      const pBar = document.getElementById('ocrProgressBar');
+      const pText = document.getElementById('ocrPercent');
+      const sText = document.getElementById('ocrStatusText');
+      const claimInput = document.getElementById('inputClaim');
+
+      pBox.classList.remove('hidden');
+      pBar.style.width = '60%';
+      pText.innerText = 'Analyzing...';
+      sText.innerText = 'Extracting text via Hardware OCR Engine...';
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const res = await fetch('/api/upload_image', { method: 'POST', body: formData });
+        const data = await res.json();
+        
+        currentUploadedPath = data.url;
+        pBar.style.width = '100%';
+        pText.innerText = '100%';
+        sText.innerText = 'OCR extraction completed!';
+        
+        setTimeout(() => pBox.classList.add('hidden'), 500);
+
+        if (data.extracted_text && data.extracted_text.trim()) {
+          claimInput.value = data.extracted_text.trim();
+          if (/ISI|BIS|STANDARD/i.test(data.extracted_text)) {
+            document.getElementById('checkLogo').checked = true;
+          }
+          // Automatically run the audit with the extracted text
+          runAudit();
+        } else {
+          claimInput.value = "[No legible text detected on image]";
+          runAudit();
+        }
+      } catch (err) {
+        console.error("Upload & OCR Error", err);
+        pBox.classList.add('hidden');
+        alert("Failed to process image OCR.");
+      }
+    }
+
+    function clearImage(e) {
+      e.stopPropagation();
+      currentUploadedPath = "";
+      fileInput.value = "";
+      document.getElementById('imagePreview').src = "";
+      document.getElementById('previewContainer').classList.add('hidden');
+      document.getElementById('imagePlaceholder').classList.remove('hidden');
+      document.getElementById('imgStatus').classList.add('hidden');
+      document.getElementById('inputClaim').value = "";
+    }
+
+    // Run Forensic Audit
+    async function runAudit() {
+      const product = document.getElementById('inputProduct').value;
+      const claim = document.getElementById('inputClaim').value;
+      const hasLogo = document.getElementById('checkLogo').checked;
+
+      if (!claim.trim()) {
+        alert("Please provide packaging or listing claim text, or upload an image.");
+        return;
+      }
+
+      const btn = document.getElementById('btnAudit');
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Auditing Evidence...`;
+      btn.disabled = true;
+
+      const formData = new FormData();
+      formData.append('product_name', product);
+      formData.append('claim_text', claim);
+      formData.append('has_logo', hasLogo);
+      formData.append('image_path', currentUploadedPath);
+
+      try {
+        const res = await fetch('/api/audit', { method: 'POST', body: formData });
+        const data = await res.json();
+        renderResults(data);
+      } catch (e) {
+        alert("Error executing audit: " + e);
+      } finally {
+        btn.innerHTML = `<i class="fa-solid fa-gavel"></i> Execute Statutory Forensics Audit`;
+        btn.disabled = false;
+      }
+    }
+
+    function renderResults(data) {
+      const analysis = data.analysis;
+      currentDossierText = data.dossier_text;
+
+      document.getElementById('emptyState').classList.add('hidden');
+      document.getElementById('resultsCard').classList.remove('hidden');
+
+      // Banner Styling based on risk
+      const banner = document.getElementById('riskBanner');
+      const badge = document.getElementById('riskBadge');
+      const circle = document.getElementById('circleProgress');
+      const score = analysis.misuse_risk_score;
+
+      document.getElementById('riskScoreText').innerText = `${score}% Misuse Risk Index`;
+      document.getElementById('circlePercent').innerText = `${score}%`;
+      circle.setAttribute('stroke-dasharray', `${score}, 100`);
+      document.getElementById('actionRecommendation').innerText = analysis.recommended_action;
+
+      if (analysis.status_verdict === "NON_BIS_DOCUMENT") {
+        banner.className = "rounded-2xl p-6 border shadow-xl flex items-center justify-between bg-slate-800/80 border-slate-700";
+        badge.className = "text-xs uppercase font-extrabold px-3 py-1 rounded-full border tracking-wide bg-slate-700 text-slate-300 border-slate-600";
+        badge.innerText = "NON-BIS DOCUMENT / NO MARKS";
+        circle.setAttribute('class', 'text-slate-500');
+      } else if (score >= 51) {
+        banner.className = "rounded-2xl p-6 border shadow-xl flex items-center justify-between bg-gradient-to-r from-red-950/80 to-slate-900 border-red-700/80";
+        badge.className = "text-xs uppercase font-extrabold px-3 py-1 rounded-full border tracking-wide bg-red-500/20 text-red-400 border-red-500/30";
+        badge.innerText = "CRITICAL VIOLATION DETECTED";
+        circle.setAttribute('class', 'text-red-500');
+      } else if (score >= 25) {
+        banner.className = "rounded-2xl p-6 border shadow-xl flex items-center justify-between bg-gradient-to-r from-amber-950/80 to-slate-900 border-amber-700/80";
+        badge.className = "text-xs uppercase font-extrabold px-3 py-1 rounded-full border tracking-wide bg-amber-500/20 text-amber-400 border-amber-500/30";
+        badge.innerText = "SUSPICIOUS / MODERATE RISK";
+        circle.setAttribute('class', 'text-amber-500');
+      } else {
+        banner.className = "rounded-2xl p-6 border shadow-xl flex items-center justify-between bg-gradient-to-r from-emerald-950/80 to-slate-900 border-emerald-700/80";
+        badge.className = "text-xs uppercase font-extrabold px-3 py-1 rounded-full border tracking-wide bg-emerald-500/20 text-emerald-400 border-emerald-500/30";
+        badge.innerText = "APPARENTLY COMPLIANT";
+        circle.setAttribute('class', 'text-emerald-500');
+      }
+
+      // License Registry Verification Card
+      const regBadge = document.getElementById('registryStatusBadge');
+      const regContent = document.getElementById('registryContent');
+      if (analysis.registry_matches && analysis.registry_matches.length > 0) {
+        const r = analysis.registry_matches[0];
+        if (r.status === "OPERATIVE") {
+          regBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded border bg-emerald-500/20 text-emerald-400 border-emerald-500/30";
+          regBadge.innerText = "OPERATIVE (ACTIVE)";
+        } else if (r.status === "CANCELLED") {
+          regBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded border bg-red-500/20 text-red-400 border-red-500/30";
+          regBadge.innerText = "CANCELLED BY BIS";
+        } else {
+          regBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded border bg-amber-500/20 text-amber-400 border-amber-500/30";
+          regBadge.innerText = r.status;
+        }
+
+        regContent.innerHTML = `
+          <div class="grid grid-cols-2 gap-2">
+            <div><span class="text-slate-400">Licensee:</span> <span class="font-semibold text-white">${r.licensee_name}</span></div>
+            <div><span class="text-slate-400">Brand:</span> <span class="text-amber-400">${r.brand}</span></div>
+            <div><span class="text-slate-400">Standard:</span> <span class="font-mono text-slate-200">${r.is_code}</span></div>
+            <div><span class="text-slate-400">Licensed Product:</span> <span class="text-slate-200">${r.product_category}</span></div>
+            <div class="col-span-2"><span class="text-slate-400">Enforcement Note:</span> <span class="${r.status === 'OPERATIVE' ? 'text-emerald-300' : 'text-red-300'}">${r.status_description} (Valid Till: ${r.valid_till})</span></div>
+          </div>
+        `;
+      } else {
+        regBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded border bg-slate-800 text-slate-400 border-slate-700";
+        regBadge.innerText = "NO RECORD";
+        regContent.innerHTML = `<p class="text-slate-400 italic">No CM/L numbers matched in active licensee records. Check format or verify with regional branch.</p>`;
+      }
+
+      // Violations List
+      const vList = document.getElementById('violationsList');
+      const vCount = document.getElementById('violationCount');
+      if (analysis.violations.length === 0) {
+        vCount.innerText = "0 Violations";
+        vCount.className = "text-xs bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/30";
+        vList.innerHTML = `
+          <div class="p-3 bg-slate-900/50 rounded-xl border border-slate-700/60 text-emerald-400 text-xs flex items-center gap-2">
+            <i class="fa-solid fa-circle-check text-base"></i>
+            <span>No prima facie statutory violations identified under the BIS Act, 2016.</span>
+          </div>
+        `;
+      } else {
+        vCount.innerText = `${analysis.violations.length} Violation(s) Detected`;
+        vCount.className = "text-xs bg-red-500/20 text-red-300 px-2 py-0.5 rounded border border-red-500/30";
+        vList.innerHTML = analysis.violations.map((v, i) => `
+          <div class="p-4 bg-slate-900/80 rounded-xl border border-red-500/40 space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-red-400 flex items-center gap-1.5">
+                <i class="fa-solid fa-ban"></i> [${v.severity}] ${v.issue}
+              </span>
+              <span class="text-[10px] bg-red-950 text-red-300 px-2 py-0.5 rounded border border-red-800">${v.statute.split(',')[0]}</span>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">${v.detail}</p>
+          </div>
+        `).join('');
+      }
+
+      // Entities Extracted
+      const ent = analysis.entities_detected;
+      document.getElementById('entitiesBox').innerHTML = `
+        <div class="flex justify-between py-1 border-b border-slate-700/50">
+          <span class="text-slate-400">Claimed Standards:</span>
+          <span class="text-amber-400">${ent.standards_claimed.join(', ') || 'None'}</span>
+        </div>
+        <div class="flex justify-between py-1 border-b border-slate-700/50">
+          <span class="text-slate-400">CM/L Licence(s):</span>
+          <span class="${ent.cml_numbers.length ? 'text-emerald-400' : 'text-red-400'}">${ent.cml_numbers.join(', ') || 'Not Detected'}</span>
+        </div>
+        <div class="flex justify-between py-1 border-b border-slate-700/50">
+          <span class="text-slate-400">CRS Registration:</span>
+          <span class="text-sky-400">${ent.crs_numbers.join(', ') || 'Not Detected'}</span>
+        </div>
+        <div class="flex justify-between py-1">
+          <span class="text-slate-400">Raw Text Chars:</span>
+          <span class="text-slate-300">${ent.raw_text_length} chars</span>
+        </div>
+      `;
+
+      // Evidence Findings Box
+      const fBox = document.getElementById('findingsBox');
+      fBox.innerHTML = analysis.evidentiary_findings.map(f => `
+        <div class="flex items-start gap-2 text-slate-300">
+          <i class="fa-solid fa-circle-notch text-[10px] text-amber-400 mt-1"></i>
+          <span>${f}</span>
+        </div>
+      `).join('');
+    }
+
+    function copyDossier() {
+      if (!currentDossierText) return;
+      navigator.clipboard.writeText(currentDossierText);
+      alert("Enforcement Dossier copied to clipboard!");
+    }
+
+    function downloadDossier() {
+      if (!currentDossierText) return;
+      const blob = new Blob([currentDossierText], { type: 'text/plain' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `BIS_Enforcement_Dossier_${Date.now()}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+    }
+
+    // Modal standards registry
+    async function openStandardsModal() {
+      document.getElementById('standardsModal').classList.remove('hidden');
+      searchStandards('');
+    }
+
+    function closeStandardsModal() {
+      document.getElementById('standardsModal').classList.add('hidden');
+    }
+
+    async function searchStandards(query) {
+      const res = await fetch(`/api/standards?q=${encodeURIComponent(query)}`);
+      const data = await res.json();
+      const list = document.getElementById('standardsList');
+      list.innerHTML = data.map(s => `
+        <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 hover:border-amber-500/40 transition">
+          <div class="flex items-center justify-between mb-1">
+            <span class="font-bold font-mono text-amber-400">${s.standard_number}</span>
+            <span class="text-[10px] px-2 py-0.5 rounded ${s.mandatory_qco ? 'bg-red-500/20 text-red-400 border border-red-500/30' : 'bg-slate-800 text-slate-400'}">${s.mandatory_qco ? 'MANDATORY QCO' : 'VOLUNTARY'}</span>
+          </div>
+          <div class="font-semibold text-slate-200">${s.short_title}</div>
+          <p class="text-[11px] text-slate-400 mt-1">${s.product_category} • ${s.scheme}</p>
+        </div>
+      `).join('');
+    }
+
+    // Modal License Registry
+    function openRegistryModal() {
+      document.getElementById('registryModal').classList.remove('hidden');
+      const list = document.getElementById('registryList');
+      list.innerHTML = licenseRegistry.map(r => `
+        <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 flex justify-between items-center">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-mono font-bold text-amber-400 text-sm">CM/L-${r.cml_number}</span>
+              <span class="text-[10px] px-2 py-0.5 rounded font-bold ${r.status === 'OPERATIVE' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'}">${r.status}</span>
+            </div>
+            <div class="text-white font-medium mt-0.5">${r.licensee_name} (${r.brand})</div>
+            <div class="text-[11px] text-slate-400">${r.product_category} • ${r.is_code} • Valid till: ${r.valid_till}</div>
+          </div>
+          <div class="text-right text-[11px] text-slate-500">${r.factory_address.split(',')[0]}</div>
+        </div>
+      `).join('');
+    }
+
+    function closeRegistryModal() {
+      document.getElementById('registryModal').classList.add('hidden');
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>
